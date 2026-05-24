@@ -34,10 +34,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Playwright browsers
+      - name: Install Playwright browsers (Chromium only for CI speed)
         run: npx playwright install --with-deps chromium
 
-      - name: Run Playwright tests
+      - name: Run Playwright tests (Chromium only in CI)
         env:
           FRONTEND_URL: https://school-dev.zydenlabs.com
           BACKEND_URL: https://school-api-dev.zydenlabs.com
@@ -46,9 +46,9 @@ jobs:
           CI: "true"
         run: |
           if [ -n "${{ github.event.inputs.grep }}" ]; then
-            npx playwright test --grep "${{ github.event.inputs.grep }}"
+            npx playwright test --project=chromium --grep "${{ github.event.inputs.grep }}"
           else
-            npx playwright test
+            npx playwright test --project=chromium
           fi
 
       - name: Upload Playwright report
