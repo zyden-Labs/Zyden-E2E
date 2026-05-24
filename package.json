@@ -1,0 +1,29 @@
+{
+  "name": "@zyden/e2e-playwright",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright E2E test suite for Zyden Edu SaaS — targets school-dev.zydenlabs.com",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:g1": "npx playwright test tests/g1-auth.spec.ts",
+    "test:g2": "npx playwright test tests/g2-attendance.spec.ts",
+    "test:g3": "npx playwright test tests/g3-marks.spec.ts",
+    "test:g4": "npx playwright test tests/g4-fees.spec.ts",
+    "test:g5": "npx playwright test tests/g5-communications.spec.ts",
+    "test:g6": "npx playwright test tests/g6-nl-queries.spec.ts",
+    "test:g7": "npx playwright test tests/g7-document-ai.spec.ts",
+    "test:g8": "npx playwright test tests/g8-reports.spec.ts",
+    "test:g9": "npx playwright test tests/g9-settings-rbac.spec.ts",
+    "test:g10": "npx playwright test tests/g10-cross-cutting.spec.ts",
+    "report": "npx playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.44.0",
+    "@types/node": "^20.0.0",
+    "@types/pg": "^8.11.0",
+    "dotenv": "^16.4.0",
+    "pg": "^8.11.0",
+    "typescript": "^5.4.0"
+  }
+}
