@@ -16,6 +16,7 @@
     "test:g8": "npx playwright test tests/g8-reports.spec.ts",
     "test:g9": "npx playwright test tests/g9-settings-rbac.spec.ts",
     "test:g10": "npx playwright test tests/g10-cross-cutting.spec.ts",
+    "test:g12": "npx playwright test tests/g12-analytics-xss.spec.ts",
     "report": "npx playwright show-report"
   },
   "devDependencies": {
