@@ -21,8 +21,8 @@ Automated end-to-end tests for the Zyden Edu SaaS platform, targeting all 10 fea
 ```bash
 cd e2e-playwright
 npm install
-npx playwright install chromium   # minimum for local runs
-cp .env.example .env.local        # fill in POSTGRES_QA_WRITER_URL if you have it
+npx playwright install chromium firefox webkit   # all 3 browsers for full local cross-browser runs
+cp .env.example .env.local                       # fill in POSTGRES_QA_WRITER_URL if you have it
 ```
 
 ### Run all tests
@@ -152,7 +152,17 @@ The suite runs automatically via `.github/workflows/e2e.yml`:
 - **Nightly at 02:00 IST** (20:30 UTC cron)
 - **Manual trigger** via GitHub Actions "Run workflow" (supports a `grep` input to run a specific group)
 
-The workflow runs on `ubuntu-latest`, installs Playwright with Chromium only (to minimize CI minutes), and uploads the HTML report as an artifact for 14 days.
+The workflow runs on `ubuntu-latest`, installs Playwright with **Chromium only** (intentional — Firefox and WebKit binaries would add ~3 CI minutes per run; cross-browser coverage is handled locally and in weekly dev runs). It uploads the HTML report as an artifact for 14 days.
+
+**Local vs CI browser matrix (intentional split):**
+
+| Surface | Chromium | Firefox | WebKit |
+|---|---|---|---|
+| Local developer run (`npx playwright test`) | Yes | Yes | Yes |
+| CI (PR + nightly) | Yes | No | No |
+
+To run all 3 browsers locally: `npx playwright test` (no flags — all projects are enabled in `playwright.config.ts`).
+To match CI exactly: `npx playwright test --project=chromium`.
 
 ### GitHub Actions secrets required
 
