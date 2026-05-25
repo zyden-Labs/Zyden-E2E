@@ -159,13 +159,11 @@ test("G5-EC-02: messaging threads endpoint does NOT exist at /api/v1/messaging/ 
   }
 });
 
-test.fixme(
-  "G5-EC-03: voice digest echo with empty body returns 400 (not 500) — BUG-VOICE-ECHO-500",
+test(
+  "G5-EC-03: voice digest echo with empty body returns 400 (not 500) — BUG-VOICE-ECHO-500 FIXED",
   async () => {
-    // CONFIRMED BUG: POST /api/v1/parent/voice-query/echo with empty JSON body returns 500.
-    // Expected: 400 (validation error for missing audio data).
-    // Assigned to: backend-engineer (voice echo endpoint lacks null-check on request body).
-    // Filed to bug-queue.md as BUG-VOICE-ECHO-500 MED severity.
+    // BUG-VOICE-ECHO-500 FIXED in commit 0b9a09f (School-Project-backend/dev, 2026-05-25).
+    // Fix: HttpMediaTypeNotSupportedException + MultipartException now handled → 400.
     const jwt = await getJwt(USERS.TEACHER);
     const res = await fetch(`${BACKEND_URL}/api/v1/parent/voice-query/echo`, {
       method: "POST",
